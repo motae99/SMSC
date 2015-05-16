@@ -1,9 +1,10 @@
 Installation:
-$sudo apt-get install minicom 
 
-$minicom -<args> //for args check the manual 
+# $sudo apt-get install minicom 
+
+# $minicom -<args> //for args check the manual 
 manual:
-$man minicom
+# $man minicom
 
 Minicom configuration has been explained offline
 for more details check the guide "minicom_User_Guide.pdf" . 
@@ -25,7 +26,7 @@ Serial port setup and configure the modem
             
 ########################## EXAMPLES ###################################
             
-1. Answer an Incoming call – ATA
+# 1. Answer an Incoming call – ATA
 
 To answer an Incoming call via modem, issue the “ATA” command in the minicom.
 
