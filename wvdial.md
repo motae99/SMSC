@@ -3,7 +3,7 @@ $sudo apt-get install wvdial
 
 ####################################################################
 
-# Configuration 
+## Configuration 
 - wvdialconf /etc/wvdial.conf
 - wvdial
 navigate to /etc/wvdial.cong and you should see your device configuration 
@@ -29,7 +29,7 @@ We gonna need these config later .....
 
 ####################################################################
 
-3. Configure internet connection manually (optional)
+## Configure internet connection manually (optional)
 
 [Dialer thenet]
 
