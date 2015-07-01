@@ -19,7 +19,7 @@ We use [char.js](http://www.chartjs.org/) library for generation charts.
 ## Configure your Database 
 1. Create new Database and insure that UTF-8 is your char set
 2. Import schema to your Database "sms.sql for **ARABIC DATABASE**" "smsEnglish.sql for *English*"
-3. * Change configuration on sms/includes/db_connection.php
+3.  Change configuration on sms/includes/db_connection.php
  - set your database USERNAME
  - set your database PASSWORD
  - set your database NAME
@@ -35,5 +35,5 @@ We use [char.js](http://www.chartjs.org/) library for generation charts.
    
 ### Contribution 
 1. Add model to insert new data in database link it with sidebar or navbar on DASHBOARD 
-2. configure bar chart to use timestamp to generate chart accordingly "for now it generates random NO"
+2. configure bar chart to use timestamp to generate chart accordingly "for now it generates random number"
 3. IT ALL YOUR MODIFY IT THE WAY YOU WANT 
