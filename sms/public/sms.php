@@ -12,6 +12,7 @@
 	//IT HAS TO BE PRESENCE BECAUSE IT'S FORWARDED TO US
 	//BY KANNEL SERVER 
 	$sender = $_GET["sender"];
+	$no = $sender;
 	
 	$service = $_GET["sk"];
 	
@@ -28,7 +29,7 @@
 		//sending replay
 		sendsms($text,$sender);
 		//inserting data into database
-		save_text($sender, $service, $location, $text);
+		save_text($no, $service, $location, $text);
 		
 	}elseif(!validate_presence($service)){
 		$text = "الرجاء تحديد نوع الخدمة ";
@@ -38,7 +39,7 @@
 		//send message 
 		sendsms($text,$sender);
 		//inserting data into database
-		save_text($sender, $service, $city, $text);
+		save_text($no, $service, $city, $text);
 		
 	}elseif($service === '100'){
 		$result_set = find_pharmacy($location); 
@@ -56,7 +57,7 @@
 			sendsms($text,$sender);
 			
 			//inserting data into database
-			save_text($sender, 'صيدلية', $city, $text);
+			save_text($no, 'صيدلية', $city, $text);
 
 
 	}elseif($service === '200'){
@@ -75,14 +76,14 @@
 			sendsms($text,$sender);
 
 			//inserting data into database
-			save_text($sender, 'معمل', $city, $text);
+			save_text($no, 'معمل', $city, $text);
 
 	}else{
 			$doctors = find_dr($service, $location);
 			$response = array();
 			while($dr = mysqli_fetch_assoc($doctors)){
 				$text = "د " . $dr["dr_name"] . " من " . $dr["availability"] . " في " . $dr["name"] . " : " . $dr["address"]  ;
-				echo $text ;
+				//echo $text ;
 				$response[] = $text ;			
 			}
 			$text = ''.implode('|',$response).'|';
@@ -91,7 +92,7 @@
 			//sending reply
 			sendsms($text,$sender);
 
-			save_text($sender, 'دكتور', $city, $text);
+			save_text($no, 'دكتور', $city, $text);
 	}
  	
 
