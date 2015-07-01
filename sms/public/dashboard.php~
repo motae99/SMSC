@@ -1,0 +1,166 @@
+<?php require_once("../includes/session.php"); ?>
+<?php require_once("../includes/db_connection.php"); ?>
+<?php require_once("../includes/functions.php"); ?>
+<?php require_once("../includes/validation_functions.php"); ?>
+<?php confirm_logged_in(); ?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>SMS Service Dashboard</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="venders/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- ICONS CSS FILE -->
+    <link href="venders/css/icons.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="stylesheets/dashboard.css" rel="stylesheet">
+
+    
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top ">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">SMS & LOGO</a>
+
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">الرجاء</a></li>
+            <li><a href="#">تحديد</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">تواجدك</a></li>
+            <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo "Hi !! " . ucfirst($_SESSION["username"]);?> <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Change Password</a></li>
+                    <li><a href="logout.php">logout</a></li>
+                
+                  </ul>
+                </li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="مكان...">
+          </form>
+                   
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="#"><span class="icon16 minia-icon-bars-2"></span>Reports</a></li>
+            <li><a href="#"><span class="icon16 icomoon-icon-mail-3 "></span>SMS</a></li>
+            <li class="dropdown"><a id="dropdownMenu1" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" ><span class="icon16 minia-icon-bars-2"> Insert</a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                    <li class="active" role="presentation"><a role="menuitem" tabindex="-1" href="#">111</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">222</a></li>
+                
+                  </ul>
+            </li>
+          
+
+ 	</div>
+ 	
+ 	
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Dashboard</h1>
+
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 ">
+              <canvas id="myChart" width="400" height="400"></canvas>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>SERVICE</h4>
+              <span class="text-muted">service chart</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>LOCATION</h4>
+              <span class="text-muted">location chart</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>PHONE NO</h4>
+              <span class="text-muted"># chart</span>
+            </div>
+          </div>
+	<?php echo message(); ?>
+          <h2 class="sub-header">SERVICE REPORT</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>PHONE NO</th>
+                  <th>LOCATION</th>
+                  <th>SERVICE</th>
+                  <th>TIME</th>
+                  <th>RESPONSE</th>
+                </tr>
+              </thead>
+              <tbody>
+              <?php  
+	      global $connection;
+	      $q = "SELECT * FROM `sms`";
+	      $r_s = mysqli_query($connection, $q);
+		      while($r = mysqli_fetch_assoc($r_s)){
+		?>
+		 <tr>
+                  <td><?php echo $r['no'];?></td>
+                  <td><?php echo $r['location'];?></td>
+                  <td><?php echo $r['service'];?></td>
+                  <td><?php echo $r['time'];?></td>
+                  <td><?php echo $r['text'];?></td>
+              </tr>
+		
+		
+		
+		<?php 
+	
+		     }
+              	?>
+             
+          
+               
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="venders/js/jquery.min.js"></script>
+    <script src="venders/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="assets/js/vendor/holder.js"></script>
+    <script src="assets/js/vendor/Chart.js"></script>
+
+  </body>
+</html>

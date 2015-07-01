@@ -1,0 +1,102 @@
+<?php require_once("../includes/db_connection.php"); ?>
+<?php require_once("../includes/functions.php"); ?>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" xml:lang="ar">
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
+</head>
+
+<?php
+function sendSmsMessage()
+{
+$url = ‘/cgi-bin/sendsms?username=kanneluser&password=df89asj89I23hvcxSDasdf3298jvkjc839′.’&charset=UCS-2&coding=2′.”&to=+254773555320″.’&text=’.urlencode(iconv(‘utf-8′, ‘ucs-2′,’bbbbbbbbbbbbbbbb’));
+$results = file(‘http://127.0.0.1:13013′.$url);
+echo “Message sent”;
+}
+sendSmsMessage();
+
+ function sendsms($message,$to)
+ {
+ $url ='/cgi-bin/sendsms?username=kannel&password=xxxxx&&charset=UCS-2&coding=2'
+ 		. "&to={$to}"
+  		. '&text=' . urlencode(iconv('utf-8', 'ucs-2', $message));
+ $results = file('http://localhost:13013'.$url);
+ }
+
+header("Location:http://localhost:13013/cgi-bin/sendsms?username=xxxx&password=xxxx&to=$in_number&text=$in_msg");  
+
+Here is what i am currently doing assuming you already have your variables initialized somewhere:
+
+$textmsg=”Hello Stackoverflow Users!”;
+
+$cellphone_number = “+254xxxxxxx”
+
+$encmsg=urlencode($textmsg);
+
+$ch= curl_init();
+curl_setopt($ch, "http://localhost:13013/cgi-bin/sendsms?username=xxxxx&password=xxxxx&to=$cellphone_number&text=$encmsg");
+curl_exec($ch);
+curl_close($ch);
+
+?>
+<?php 
+	//IT HAS TO BE PRESENCE BECAUSE IT'S FORWARDED TO US
+	//BY KANNEL SERVER 
+	$sender = $_GET["sender"];
+	
+	$service = $_GET["sk"];
+	
+	$location = $_GET["fk"];
+	
+	//retrieving location's city from database using id 
+	$city = get_location($location);
+	//echo $city ;
+	
+	if(!validate_presence($location)){
+		$response = "الرجاء تحديد مكان تواجدك (LOCATION service)";
+		$city = "undefined";
+		echo $response ;
+		
+		//inserting data into database
+		save_text($sender, $service, $city, $response);
+		
+	}elseif(!validate_presence($service)){
+		$response = "please specify your required SERVICE! format (location SERVICE)";
+		$service = "undefined";
+		echo $response ;
+	
+		//inserting data into database
+		save_text($sender, $service, $city, $response);
+		
+	}elseif(($service === "pharmacy") || ($service === "lab")){
+		$result_set = find_all($service, $location); 
+		while($result = mysqli_fetch_assoc($result_set)){
+
+			//printr($result);
+			//$response =  $result["name"] . ": " . $result["address"]  ;//This returns the last value 
+			
+			$response =  array($result["name"] . ": " . $result["address"]) ;
+			echo $response ;
+			echo  "<br/>";
+			save_text($sender, $service, $city, $response);
+		}
+	}else{
+			$doctors = find_dr($service, $location);
+			while($dr = mysqli_fetch_assoc($doctors)){
+				$response = "Dr " . $dr["dr_name"] . " works from " . $dr["availability"] . " at " . $dr["name"] . " : " . $dr["address"] ;
+				echo $response . "<br/>";
+				save_text($sender, $service, $city, $response);
+			}
+
+	}
+ 	
+	//save_text($sender, $service, $city, $response);
+
+	if (isset($connection)) {
+	  mysqli_close($connection);
+	}
+
+?>
+</html>
+

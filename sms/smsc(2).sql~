@@ -1,0 +1,218 @@
+-- phpMyAdmin SQL Dump
+-- version 3.5.8.1deb1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Jun 01, 2015 at 04:16 AM
+-- Server version: 5.5.34-0ubuntu0.13.04.1
+-- PHP Version: 5.4.9-4ubuntu2.4
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `smsc`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clinic`
+--
+
+CREATE TABLE IF NOT EXISTS `clinic` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `address` varchar(45) NOT NULL,
+  `loc_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `loc_id` (`loc_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+--
+-- Dumping data for table `clinic`
+--
+
+INSERT INTO `clinic` (`id`, `name`, `address`, `loc_id`) VALUES
+(1, 'khartoum hosbital', 'khartoum hospital street', 1),
+(2, 'soba hosbital', 'The address for the hosbital', 2),
+(4, 'Any hosibial you know', 'The address you prefere', 3),
+(6, 'aljouda', 'shafa zalat ', 1),
+(22, 'slah altibi', 'omdurman', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lab`
+--
+
+CREATE TABLE IF NOT EXISTS `lab` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `address` varchar(45) NOT NULL,
+  `loc_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `loc_id` (`loc_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `lab`
+--
+
+INSERT INTO `lab` (`id`, `name`, `address`, `loc_id`) VALUES
+(1, 'khartoum hosbital labs', 'khartoum hospital street', 1),
+(2, 'excelent labatory', 'at this location in bahri', 2),
+(3, 'any lab', 'at other location in bahri', 2),
+(4, 'stak lab', 'ombada al3ardha', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `location`
+--
+
+CREATE TABLE IF NOT EXISTS `location` (
+  `id` int(11) NOT NULL,
+  `state` varchar(45) NOT NULL,
+  `city` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `location`
+--
+
+INSERT INTO `location` (`id`, `state`, `city`) VALUES
+(1, 'khartoum', 'khartoum'),
+(2, 'khartoum', 'bahri'),
+(3, 'khartoum', 'omdurman');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pharmacy`
+--
+
+CREATE TABLE IF NOT EXISTS `pharmacy` (
+  `id` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `address` varchar(45) NOT NULL,
+  `loc_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `loc_id` (`loc_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pharmacy`
+--
+
+INSERT INTO `pharmacy` (`id`, `name`, `address`, `loc_id`) VALUES
+(1, 'mc nimer', 'mc nimer street', 1),
+(2, 'albaz', 'jabra street', 1),
+(4, 'dkjfalk', 'dfkajldjfla ', 2),
+(5, 'Mohammed Saeed', 'alfitaihab ', 3),
+(6, 'khartoum hosbital pharmacy', 'khartoum hospital street', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `specialist`
+--
+
+CREATE TABLE IF NOT EXISTS `specialist` (
+  `id` int(11) NOT NULL,
+  `dr_name` varchar(45) NOT NULL,
+  `specialist` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `specialist`
+--
+
+INSERT INTO `specialist` (`id`, `dr_name`, `specialist`) VALUES
+(1, 'mahammed ', 'ENT'),
+(2, 'khalid omer', 'eye'),
+(4, 'omer haroon', 'phsycatric'),
+(5, 'dr mohammed saeed', 'eye'),
+(6, 'ali hamed', 'ENT'),
+(7, 'alfadel hassan', 'ENT'),
+(8, 'hussain ahme', 'eye'),
+(9, 'abdulrahman taha', 'phsycatric');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `works_at`
+--
+
+CREATE TABLE IF NOT EXISTS `works_at` (
+  `clinic_id` int(11) NOT NULL,
+  `dr_id` int(11) NOT NULL,
+  `availability` varchar(45) NOT NULL,
+  KEY `clinic_id` (`clinic_id`),
+  KEY `dr_id` (`dr_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `works_at`
+--
+
+INSERT INTO `works_at` (`clinic_id`, `dr_id`, `availability`) VALUES
+(1, 1, '1AM TO 6AM'),
+(1, 1, '6  to 10 '),
+(4, 4, '10AM to 3PM'),
+(2, 8, '12AM to 4PM'),
+(22, 9, '6PM to 10PM'),
+(6, 6, '4pm to 8pm'),
+(22, 6, '2PM to 4PM'),
+(6, 4, '1PM TO 4PM'),
+(2, 2, '10AM to 3PM'),
+(2, 8, '8PM to 10PM'),
+(4, 9, '4PM to 6PM'),
+(4, 4, '8AM to 12PM'),
+(6, 7, '7AM TO 10AM'),
+(6, 6, '6PM to 8PM'),
+(22, 5, '5PM to 8PM'),
+(22, 4, '3PM to 6PM'),
+(1, 9, '4PM to 8PM'),
+(1, 5, '9AM to 2PM');
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `clinic`
+--
+ALTER TABLE `clinic`
+  ADD CONSTRAINT `clinic_ibfk_1` FOREIGN KEY (`loc_id`) REFERENCES `location` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `lab`
+--
+ALTER TABLE `lab`
+  ADD CONSTRAINT `lab_ibfk_1` FOREIGN KEY (`loc_id`) REFERENCES `location` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `pharmacy`
+--
+ALTER TABLE `pharmacy`
+  ADD CONSTRAINT `pharmacy_ibfk_1` FOREIGN KEY (`loc_id`) REFERENCES `location` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `works_at`
+--
+ALTER TABLE `works_at`
+  ADD CONSTRAINT `works_at_ibfk_1` FOREIGN KEY (`clinic_id`) REFERENCES `clinic` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `works_at_ibfk_2` FOREIGN KEY (`dr_id`) REFERENCES `specialist` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
