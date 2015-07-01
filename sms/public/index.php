@@ -79,26 +79,33 @@ $query = "SELECT * FROM sms" ;
       <div class="row">
         <div class="col-sm-3 col-md-2 col-md-push-3 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">عرض <span class="sr-only">(current)</span></a></li>
-            <li><a href="#charts"><span class="icon16 minia-icon-bars-2"></span>التقرير</a></li>
+            <li class="active"><a href="#">OVERVIEW <span class="sr-only">(current)</span></a></li>
+            <li><a href="#charts"><span class="icon16 minia-icon-bars-2"></span>الخدمات</a></li>
+            <li><a href="#bar"><span class="icon16 icomoon-icon-tab"></span>الجدول الزمني</a></li>
             <li><a href="#sms"><span class="icon16 icomoon-icon-mail-3 "></span>الرسائل</a></li>
- 	      </div>
- 	
+        </div>
+  
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-     <div id="charts"class="row placeholders">
+     <div id="charts">
+     <div  class="row placeholders">
           <h1 class="page-header">لوحة التحكم</h1>
 
               <div id="canvas-holder" class="col-xs-6 col-sm-6 ">
-                <canvas id="Pie" width="400" height="300"/>
-              <?php     echo $data['service'] . $data['location']; ?>
+                <h3> مكان المستخدمين</h3>
+                <canvas id="Pie" width="300" height="300"/>
               </div>
 
               <div id="canvas-holder" class="col-xs-6 col-sm-6 ">
-                <canvas id="Doughnut" width="400" height="300"/>
+                <h3>الخدمة المطلوبة</h3>
+                <canvas id="Doughnut" width="300" height="300"/>
               </div>
         </div>
-  
+    </div>
 
+               <div id="bar">
+                <h3 style="center">الجدول الزمني للرسائل المرسلة</h3>
+                <canvas id="canvas" height="150" width="600"></canvas>
+              </div>
   <script>
 
     var pieData = [
@@ -185,6 +192,29 @@ $query = "SELECT * FROM sms" ;
 
       ];
 
+      var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+
+      var barChartData = {
+        labels : ["ياناير","فبراير","مارس","ابريل","مايو","يونيو","يوليو"],
+        datasets : [
+          {
+            fillColor : "rgba(220,220,220,0.5)",
+            strokeColor : "rgba(220,220,220,0.8)",
+            highlightFill: "rgba(220,220,220,0.75)",
+            highlightStroke: "rgba(220,220,220,1)",
+            data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+          },
+          {
+            fillColor : "rgba(151,187,205,0.5)",
+            strokeColor : "rgba(151,187,205,0.8)",
+            highlightFill : "rgba(151,187,205,0.75)",
+            highlightStroke : "rgba(151,187,205,1)",
+            data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+          }
+        ]
+
+      }
+
       
 
       window.onload = function(){
@@ -193,14 +223,19 @@ $query = "SELECT * FROM sms" ;
 
         var ctx = document.getElementById("Doughnut").getContext("2d");
         window.myDoughnut = new Chart(ctx).Doughnut(doughnutData);
+         var ctx = document.getElementById("canvas").getContext("2d");
+        window.myBar = new Chart(ctx).Bar(barChartData, {
+          responsive : true
+         });
       };
 
+     
 
   </script>
        
 
 
-	<?php echo message(); ?>
+  <?php echo message(); ?>
           
           <div id="sms"class="table-responsive">
             <h2 class="sub-header">لوحة الرسائل المرسلة</h2>
@@ -216,20 +251,20 @@ $query = "SELECT * FROM sms" ;
               </thead>
               <tbody>
               <?php  
-	      global $connection;
-	      $q = "SELECT * FROM `sms`";
-	      $r_s = mysqli_query($connection, $q);
-		      while($r = mysqli_fetch_assoc($r_s)){
-		?>
-		          <tr>
+        global $connection;
+        $q = "SELECT * FROM `sms`";
+        $r_s = mysqli_query($connection, $q);
+          while($r = mysqli_fetch_assoc($r_s)){
+    ?>
+              <tr>
                   <td><?php echo $r['no'];?></td>
                   <td><?php echo $r['location'];?></td>
                   <td><?php echo $r['service'];?></td>
                   <td><?php echo $r['time'];?></td>
                   <td><?php echo $r['text'];?></td>
               </tr>
-		<?php 
-	        }
+    <?php 
+          }
     ?>
              
               </tbody>
@@ -238,9 +273,10 @@ $query = "SELECT * FROM sms" ;
         </div>
       </div>
     </div>
-    <footer class="footer">
+  <footer class="footer">
       <div class="container">
-        <p class="text-muted">Place sticky footer content here.</p>
+        <p class="text-muted">Contact developer at motae99@gmail.com</p>
+        <a href="https://github.com/motae99/SMSC">Download source Code MIT licenced open-source</a>
       </div>
     </footer>
 
