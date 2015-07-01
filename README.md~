@@ -5,16 +5,16 @@ This project is developed by
 ## Install 
 wvdial and refere to wvdial.md
 
-minicom to verify your modem support for sending and receiving OPTIONAL refere to minicom.md.
+minicom to verify your modem support for sending and receiving OPTIONAL refere to minicom.md
 
 Refere to [kannel](http://www.kannel.org/doc.shtml) the official guide for more details
-.. Change kannel configuration file with the provided to "kannel.conf".
+ .. change kannel configuration file with the provided to "kannel.conf"
 
-php needs to be installed as well as mysql and a working webserver.
+php needs to be installed as well as mysql and a working webserver 
 
-For front-end we use [bootstrap](http://getbootstrap.com/) for more information about cosumizing your design.
+For front-end we use [bootstrap](http://getbootstrap.com/) for more information about cosumizing your design
 
-We use [char.js](http://www.chartjs.org/) library for generation charts.
+We use [char.js](http://www.chartjs.org/) library for generation charts
 
 ## Configure your Database 
 1. Create new Database and insure that UTF-8 is your char set
