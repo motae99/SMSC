@@ -1,19 +1,17 @@
 # Short Masseging Service
 This project is developed by 
-1- 
-2-
-3-
-4- MO TAHA motae99@gmail.com "masterBranch"
+ MO TAHA motae99@gmail.com "masterBranch"
 
-# Install wvdial and refere to wvdial.md
-# Install minicom to verify your modem support for sending and receiving OPTIONAL refere to minicom.md
-# Install kannel and refere to http://www.kannel.org/doc.shtml the official guide for more details
+# Install 
+wvdial and refere to wvdial.md
+minicom to verify your modem support for sending and receiving OPTIONAL refere to minicom.md
+kannel and refere to http://www.kannel.org/doc.shtml the official guide for more details
 - change kannel configuration file with the provided to "kannel.conf"
 
-# Php needs to be installed as well as mysql and a working webserver 
+php needs to be installed as well as mysql and a working webserver 
 
-# For front-end we use bootstrap refere to http://getbootstrap.com/ for more information about cosumizing your design
-# We use char.js library for generation charts refere to http://www.chartjs.org/
+For front-end we use bootstrap refere to http://getbootstrap.com/ for more information about cosumizing your design
+We use char.js library for generation charts refere to http://www.chartjs.org/
 
 # Configure your Database 
 1. Create new Database and insure that UTF-8 is your char set
