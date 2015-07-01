@@ -246,7 +246,7 @@ $query = "SELECT * FROM sms" ;
                   <th>المكان</th>
                   <th>الخدمة</th>
                   <th>الوقت</th>
-                  <th>الرسالة</th>
+                  <th>نص الرسالة</th>
                 </tr>
               </thead>
               <tbody>
