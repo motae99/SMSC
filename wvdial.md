@@ -1,11 +1,11 @@
-1. INSTALLATION
+# INSTALLATION
 $sudo apt-get install wvdial
 
 ####################################################################
 
-2. Configuration
-wvdialconf /etc/wvdial.conf
-
+# Configuration *
+- wvdialconf /etc/wvdial.conf
+- wvdial
 navigate to /etc/wvdial.cong and you should see your device configuration 
 should look something like this 
 
